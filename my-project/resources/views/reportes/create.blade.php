@@ -81,10 +81,10 @@
                     <td class="px-4 py-2">{{$reporte->Descripción}}</td>
                     <td class="px-4 py-2">{{$reporte->Fecha}}</td>
                     <td class="px-4 py-2">{{$reporte->NivelRiesgo}}</td>
-                    <td class="px-4 py-2">{{$reporte->seguimiento_id}}</td>
+                    <td class="px-4 py-2">{{$reporte->seguimiento->estado}}</td>
                     <td class="px-4 py-2 text-center">
                         <a href="{{ route('reportes.edit', ['id' => $reporte->id])}}" class="bg-yellow-400 text-white px-2 py-1 rounded hover:bg-yellow-500 focus:ring-2 focus:ring-offset-2 focus:ring-yellow-300">
-                            ✏️ Editar
+                            Editar
                         </a>
 
                     </td>

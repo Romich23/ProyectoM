@@ -20,7 +20,9 @@ class SeguimientoController extends Controller
      */
     public function create()
     {
-        //
+        $seguimientos = [];
+        $seguimientos['seguimientos'] = Seguimiento::all();
+        return view('seguimientos.create')->with('seguimientos', $seguimientos);
     }
 
     /**
@@ -28,7 +30,10 @@ class SeguimientoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $seguimiento = new Seguimiento();
+        $seguimiento->setEstado($request->input('estado'));
+        $seguimiento->save();
+        return back();
     }
 
     /**
@@ -42,24 +47,30 @@ class SeguimientoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Seguimiento $seguimiento)
+    public function edit($id)
     {
-        //
+        $seguimiento = [];
+        $seguimiento['seguimiento'] = Seguimiento::find($id);
+        return view('seguimientos.edit')->with('seguimiento', $seguimiento);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Seguimiento $seguimiento)
+    public function update(Request $request, $id)
     {
-        //
+        $seguimiento = Seguimiento::find($id);
+        $seguimiento->setEstado($request->input('estado'));
+        $seguimiento->save();
+        return redirect()->route('seguimientos.create');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Seguimiento $seguimiento)
+    public function destroy($id)
     {
-        //
+        Seguimiento::destroy($id);
+        return back();
     }
 }

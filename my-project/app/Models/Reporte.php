@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -50,27 +50,33 @@ class Reporte extends Model
         $this->attributes['NivelRiesgo'] = $nivelriesgo;
     }
     public function getImage()
-
     {
-
         return $this->attributes['imagen'];
-
     }
 
     public function setImage($imagen)
-
     {
-
         $this->attributes['imagen'] = $imagen;
-
     }
 
-    /**
-     * Relación uno a uno para obtener el seguimiento asociado con el reporte.
-     */
-    public function seguimiento(): HasOne
+    public function getSeguimiento()
     {
-        return $this->hasOne(Seguimiento::class);
+        return $this->attributes['seguimiento_id'];
+    }
+
+    public function setSeguimiento($seguimiento_id)
+    {
+        $this->attributes['seguimiento_id'] = $seguimiento_id;
+    }
+
+
+
+    /**
+     * Relación inversa (Para eso se usa belongsTo).
+     */
+    public function seguimiento()
+    {
+        return $this->belongsTo(Seguimiento::class);
     }
 
 }

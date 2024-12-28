@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-
-class AuthAdmin
+class AuthBrigadista
 {
     /**
      * Handle an incoming request.
@@ -17,11 +16,9 @@ class AuthAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user() && Auth::user()->getRole() == 'admin') {
+        if (Auth::user() && Auth::user()->getRole() == 'brigadista') {
             return $next($request);
-        } else if (Auth::user() && Auth::user()->getRole() == 'brigadista') {
-            return $next($request);
-        }else{
+        } else {
             return redirect()->route('home.index');
         }
     }

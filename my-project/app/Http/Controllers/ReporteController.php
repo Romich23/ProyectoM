@@ -30,7 +30,8 @@ class ReporteController extends Controller
     {
         //Prepara la lista de reportes
         $reportes = [];
-        $reportes['reportes'] = Reporte::all();
+        //Se recuperan los rgistros junto con la relación, para eso sirve with('seguimiento').
+        $reportes['reportes'] = Reporte::with('seguimiento')->get();
         return view("reportes.create")->with('reportes', $reportes);
     }
 

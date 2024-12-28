@@ -11,14 +11,34 @@
                 </div>
 
                 <!-- Navigation Links -->
+                @if(auth()->user()->getRole() == 'admin')
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('reportes.create')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('reportes.create')" :active="request()->routeIs('reportes.create')">
+                        {{ __('Reportes') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('seguimientos.create')" :active="request()->routeIs('seguimientos.create')">
+                        {{ __('Seguimientos') }}
+                    </x-nav-link>
+                </div>
+                @elseif(auth()->user()->getRole() == 'brigadista')
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('brigadista.index')" :active="request()->routeIs('brigadista.index')">
                         {{ __('Reportes') }}
                     </x-nav-link>
                 </div>
+                @else
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-nav-link>
+                </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->
