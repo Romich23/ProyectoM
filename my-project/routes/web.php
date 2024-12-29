@@ -8,7 +8,12 @@ use App\Http\Controllers\SeguimientoController;
 use App\Http\Middleware\AuthAdmin;
 use App\Http\Middleware\AuthBrigadista;
 
-//Verbos HTTP: GET/POST/PUT|PATCH/DELETE.
+//Verbos HTTP: 
+//GET: Recupera los recursos
+//POST: Crea un recurso
+//PUT: Actualiza por completo un recurso existente
+//PATCH: Actualiza solo una partre del recurso existente, por ejemplo, de un usuario, solo se actualizaria el correo.
+//DELETE: Elimina un recurso existente
 
 //Ruta principal
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
@@ -18,7 +23,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified', AuthAdmin::class])->name('dashboard');
 
-//Rutas protegidas con un mecanismo de seguridad HTTP (Middleware).
+//Rutas protegidas con un mecanismo de seguridad HTTP (Middleware). rutas visibles solo para el usuario con rol admin
 Route::middleware([AuthAdmin::class])->group(function () {
     //Rutas para los reportes
     //Route::get('/reportes', [ReporteController::class, 'index'])->name('home.index');
@@ -51,9 +56,11 @@ Route::middleware([AuthAdmin::class])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+//Rutas protegidas con un mecanismo de seguridad HTTP (Middleware). rutas visibles solo para el usuario con rol brigadista
 Route::middleware([AuthBrigadista::class])->group(function () {
-    //Rutas para listare los reportes al brigadista
+    //Rutas para listar los reportes al brigadista
     Route::get('/listado-reportes', [ReporteBrigadistaController::class, 'index'])->name('brigadista.index');
+    //Ruta para actualizar el estado del reporte.
     Route::patch('/listado-reportes/{id}', [ReporteBrigadistaController::class, 'update'])->name('brigadista.update');
 });
 

@@ -26,6 +26,7 @@ class Seguimiento extends Model
     //Relación uno a muchos (Para eso se usa hasMany).
     //La relación va de seguimiento a reportes junto con su inversa.
     //La inversa se encuentra en el modelo reporte que va de reporte a seguimiento.
+    //se puede probar la relación seguimientos a reportes en tinker: Seguimiento::find(2)->reportes;
     public function reportes(){
         return $this->hasMany(Reporte::class);
     }

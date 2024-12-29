@@ -73,6 +73,7 @@ class Reporte extends Model
 
     /**
      * Relación inversa (Para eso se usa belongsTo).
+     * se puede probar la relación inversa en tinker: Reporte::find(1)->seguimiento;
      */
     public function seguimiento()
     {
