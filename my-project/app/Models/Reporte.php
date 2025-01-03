@@ -13,6 +13,8 @@ class Reporte extends Model
     }
 
     public function setId($id){
+        //manda a llamar al arreglo atributos y saca el nombre de la tabla de reportes
+        //y le va asignar lo que le pasamos (controlador)
         $this->attributes['id'] = $id;
     }
 

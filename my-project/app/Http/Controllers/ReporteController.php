@@ -36,7 +36,7 @@ class ReporteController extends Controller
     }
 
     /**
-     * //alamcena un nuevo recurso en la base de datos
+     * //almacena un nuevo recurso en la base de datos
      */
     public function store(Request $request)
     {
